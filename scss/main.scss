@@ -45,6 +45,31 @@ body {
   }
 }
 
+form {
+  max-width: 500px;
+  width: 90%;
+  margin: 20px;
+  input[type=text] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+  }
+  input[type=submit] {
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    background-color: #00917c;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-color: lighten(#00917c, 10%);
+    }
+  }
+}
+
 .topnav {
   overflow: hidden;
   background-color: #333;
