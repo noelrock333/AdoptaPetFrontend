@@ -34,7 +34,37 @@ function renderPets(petsList) {
 //   document.querySelector('#cart_counter').innerHTML = petsCart.length;
 // }
 
-document.addEventListener('DOMContentLoaded', function() {
+function getPetsPromise() {
+  return new Promise((resolve, reject) => {
+    fetch('https://petstore.swagger.io/v2/pet/findByStatus?status=available', {
+      method: 'GET',
+    }).then(data => data.json())
+    .then((petsResponse) => {
+      console.log(petsResponse);
+      return resolve(petsResponse);
+    })
+    .catch(() => {
+      // alert('Ha fallado la petición http');
+      return reject();
+    })
+  })
+}
+
+function getPetsCallback(callback) {
+  fetch('https://petstore.swagger.io/v2/pet/findByStatus?status=available', {
+    method: 'GET',
+  }).then(data => data.json())
+  .then((petsResponse) => {
+    console.log(petsResponse);
+    callback(petsResponse);
+  })
+  .catch(() => {
+    // alert('Ha fallado la petición http');
+    callback()
+  })
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
   // const petsCart = window.localStorage.getItem('storedCart') ? JSON.parse(window.localStorage.getItem('storedCart')) : [];
   // document.querySelector('#cart_counter').innerHTML = petsCart.length;
   var petsList = [
@@ -75,10 +105,30 @@ document.addEventListener('DOMContentLoaded', function() {
       "status": "available"
   },
   ]
-  renderPets(petsList)
   
-  const petButtons = document.querySelectorAll('.pet button')
-  petButtons.forEach(button => {
-    button.addEventListener('click', addPetToCart)
+  
+  // getPetsCallback(function(petsList) {
+  //   renderPets(petsList)
+  // })
+
+  /* Usando promesas async await */
+  // try {
+  //   petsList = await getPetsPromise()
+  //   console.log(petsList)
+  //   renderPets(petsList)
+  // } catch(error) {
+  //   console.log(error)
+  // }
+  
+  /* Usando promesas normales */
+  getPetsPromise().then(petsList => {
+    renderPets(petsList)
+  }).catch((error) => {
+    console.log(error)
   })
+  
+  // const petButtons = document.querySelectorAll('.pet button')
+  // petButtons.forEach(button => {
+  //   button.addEventListener('click', addPetToCart)
+  // })
 });
