@@ -32,16 +32,16 @@ function addPetToCart(event) {
 function createPet(event) {
   event.preventDefault()
   
-  var formData = new FormData()
-  formData.set('nombre', 'Noel')
-  formData.set('ubicacion', 'Puebla 123, Colima, Colima')
-  formData.set('foto', 'https://www.nationalgeographic.com.es/medio/2019/11/18/un-perro-de-la-raza-labrador-retriever_bfcf74f1_800x800.jpg')
-  
-  fetch('http://59d559a3c74d.ngrok.io/v1/mascotas', {
+  const formData = new URLSearchParams(new FormData(this));
+
+  fetch('http://localhost:3000/v1/mascotas', {
     method: 'POST',
-    body: formData
-  }).then(data => {
-    console.log(data); // JSON data parsed by `data.json()` call
+    body: formData,
+  }).then(() => {
+    this.reset()
+    alert('Mascota guardad correctamente')
+  }).catch((error) => {
+    console.log(error)
   });
 }
 
@@ -92,9 +92,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   var cartCounter = document.querySelector('#cart_counter')
   cartCounter.innerHTML = petsCart.length
 
-  // var formDOM = document.querySelector('#new-pet-form')
-  // if (formDOM) {
-  //   formDOM.addEventListener('submit', createPet)
-  // }
+  var formDOM = document.querySelector('#new-pet-form')
+  if (formDOM) {
+    formDOM.addEventListener('submit', createPet)
+  }
 
 })
