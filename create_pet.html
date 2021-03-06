@@ -10,19 +10,20 @@
 <body>
   <header>
     <div>Carrito: <span id="cart_counter"></span></div>
-    <div class="topnav das" id="myTopnav">
+    <div class="topnav" id="myTopnav">
       <a href="/pets_list.html">Inicio</a>
       <a href="#" class="active">Anuncia tu mascota</a>
-      <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+      <a href="javascript:void(0);" class="icon" id="burguer_menu">
         <i class="fa fa-bars"></i>
       </a>
     </div>
   </header>
-  <form action="http://localhost:3000/v1/mascotas" method="POST" id="new-pet-form">
+  <form action="http://59d559a3c74d.ngrok.io/v1/mascotas" method="POST" id="new-pet-form">
     <input type="text" placeholder="Nombre" name="nombre">
     <input type="text" placeholder="Url de la foto" name="foto">
     <input type="text" placeholder="Dirección" name="ubicacion">
     <input type="submit" value="Crear anuncio">
   </form>
+  <script src="./app.js"></script>
 </body>
 </html>
