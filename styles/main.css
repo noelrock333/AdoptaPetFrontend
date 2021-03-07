@@ -7,8 +7,11 @@ body {
 }
 
 .pets {
+  margin: 20px 10px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
 }
 @media (max-width: 900px) {
   .pets {
@@ -21,12 +24,20 @@ body {
   }
 }
 .pets .pet {
+  background-color: white;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 .pets .pet h4 {
   font-size: 1.6em;
+  margin: 0 0 15px 0;
 }
-.pets .pet img {
+.pets .pet .photo {
+  height: 200px;
+  overflow: hidden;
+}
+.pets .pet .photo img {
   width: 100%;
 }
 .pets .pet button {
@@ -40,6 +51,7 @@ body {
   margin-top: 10px;
   cursor: pointer;
   outline: none;
+  margin-top: auto;
 }
 .pets .pet button:hover {
   background-color: #1569a2;

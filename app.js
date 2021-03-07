@@ -6,7 +6,9 @@ function toggleMenu() {
 function renderPet(pet) {
   return `<div class="pet">
       <h4>${pet.nombre}</h4>
-      <img src="${pet.foto}" alt="">
+      <div class="photo">
+        <img src="${pet.foto}" alt="">
+      </div>
       <div class="location">
         <span>Ubicación: ${pet.ubicacion}</span>
       </div>
@@ -34,21 +36,21 @@ function createPet(event) {
   
   const formData = new URLSearchParams(new FormData(this));
 
-  fetch('http://localhost:3000/v1/mascotas', {
+  fetch('https://adoptapetapi.herokuapp.com/v1/mascotas', {
     method: 'POST',
     body: formData,
   }).then(() => {
     this.reset()
-    alert('Mascota guardad correctamente')
+    alert('Mascota anunciada correctamente')
   }).catch((error) => {
-    console.log(error)
+    alert('ERROR: No se pudo crear el recurso')
   });
 }
 
 function getPetListPromise() {
   console.log('getPetListPromise()')
   return new Promise((resolve, reject) => {
-    fetch('http://59d559a3c74d.ngrok.io/v1/mascotas', {
+    fetch('https://adoptapetapi.herokuapp.com/v1/mascotas', {
       method: 'GET'
     })
     .then((data) => data.json())
